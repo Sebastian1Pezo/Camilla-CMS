@@ -1,0 +1,11 @@
+{
+  "ultimo_aggiornamento": "2026-09-22",
+  "nota": "Modificato dal pannello admin di Camilla",
+  "fuso": "Europe/Rome",
+  "slots": [
+    { "giorno": "Sabato", "ore": ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00"] },
+    { "giorno": "Domenica", "ore": ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00"] }
+  ],
+  "chiuso": [],
+  "annuncio": "Promo lancio: 30 min GRATIS per i primi 3 studenti — scrivi PROVA GRATIS"
+}

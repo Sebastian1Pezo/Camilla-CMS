@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Area Camilla — CMS</title>
+  <link rel="stylesheet" href="../admin.css" />
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  <div id="login-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#f5f5f5;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;">
+    <h1>Area Camilla — CMS</h1>
+    <p id="overlay-status">Caricamento...</p>
+    <button id="overlay-login" style="display:none;padding:12px 24px;font-size:16px;background:#2d2d2d;color:white;border:none;border-radius:6px;cursor:pointer;margin:10px;">Login with Netlify Identity</button>
+    <button id="overlay-recover" style="display:none;padding:12px 24px;font-size:16px;background:#888;color:white;border:none;border-radius:6px;cursor:pointer;margin:10px;">Recupera password</button>
+  </div>
+
+  <aside id="sidebar" style="display:none;">
+    <div class="sidebar-header">
+      <span class="logo">文</span>
+      <span class="brand">Camilla CMS</span>
+    </div>
+    <nav>
+      <button class="nav-item active" data-view="dashboard">📊 Dashboard</button>
+      <button class="nav-item" data-view="content">📝 Contenuti</button>
+      <button class="nav-item" data-view="pages">📄 Pagine</button>
+      <button class="nav-item" data-view="media">🖼️ Media</button>
+      <button class="nav-item" data-view="settings">⚙️ Impostazioni</button>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="logout-btn" class="btn-logout">Esci 🔒</button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main id="main">
+    <header class="topbar">
+      <button id="menu-toggle" class="menu-toggle">☰</button>
+      <h1 id="page-title">Dashboard</h1>
+      <div class="topbar-actions">
+        <button id="save-btn" class="btn-save">Salva 💾</button>
+      </div>
+    </header>
+
+    <div id="content-area">
+      <!-- Dashboard -->
+      <div id="view-dashboard" class="view active">
+        <h2>Benvenuta, Camilla!</h2>
+        <p>Ultima modifica: <span id="last-modified">—</span></p>
+        <div class="stats-grid">
+          <div class="stat-card"><span class="stat-num" id="stat-news">0</span><span class="stat-label">Articoli</span></div>
+          <div class="stat-card"><span class="stat-num" id="stat-pages">1</span><span class="stat-label">Pagine</span></div>
+          <div class="stat-card"><span class="stat-num" id="stat-media">0</span><span class="stat-label">Media</span></div>
+        </div>
+      </div>
+
+      <!-- Contenuti (News) -->
+      <div id="view-content" class="view">
+        <h2>Articoli e News</h2>
+        <button id="new-article" class="btn-primary">+ Nuovo articolo</button>
+        <div id="articles-list"></div>
+        <div id="article-editor" style="display:none;">
+          <input id="art-title" placeholder="Titolo articolo" />
+          <input id="art-date" type="date" />
+          <input id="art-cover" placeholder="URL immagine copertina" />
+          <textarea id="art-body" rows="10" placeholder="Scrivi il contenuto..."></textarea>
+          <button id="save-article" class="btn-primary">Pubblica</button>
+          <button id="cancel-article" class="btn-secondary">Annulla</button>
+        </div>
+      </div>
+
+      <!-- Pagine -->
+      <div id="view-pages" class="view">
+        <h2>Pagine del sito</h2>
+        <div id="blocks-container"></div>
+        <button id="add-block" class="btn-primary">+ Aggiungi blocco</button>
+      </div>
+
+      <!-- Media -->
+      <div id="view-media" class="view">
+        <h2>Libreria Media</h2>
+        <p>Carica immagini, video e PDF. (Funzionalità in arrivo)</p>
+      </div>
+
+      <!-- Impostazioni -->
+      <div id="view-settings" class="view">
+        <h2>Impostazioni Sito</h2>
+        <div class="form-group">
+          <label>Numero WhatsApp</label>
+          <input id="s-whatsapp" />
+        </div>
+        <div class="form-group">
+          <label>Telefono visibile</label>
+          <input id="s-telefono" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input id="s-email" type="email" />
+        </div>
+        <div class="form-group">
+          <label>WeChat ID</label>
+          <input id="s-wechat" />
+        </div>
+        <div class="form-group">
+          <label>Weibo ID</label>
+          <input id="s-weibo" />
+        </div>
+        <div class="form-group">
+          <label>Annuncio Promo</label>
+          <input id="s-annuncio" />
+        </div>
+        <div class="form-group">
+          <label>Sabato (ore separate da virgola)</label>
+          <input id="s-sabato" />
+        </div>
+        <div class="form-group">
+          <label>Domenica (ore separate da virgola)</label>
+          <input id="s-domenica" />
+        </div>
+        <button id="save-settings" class="btn-primary">Salva impostazioni</button>
+        <p id="settings-status"></p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Netlify Identity
+    if (window.netlifyIdentity) {
+      const overlay = document.getElementById("login-overlay");
+      const overlayStatus = document.getElementById("overlay-status");
+      const overlayLogin = document.getElementById("overlay-login");
+      const overlayRecover = document.getElementById("overlay-recover");
+
+      window.netlifyIdentity.on("init", (user) => {
+        if (user) {
+          overlay.style.display = "none";
+          document.getElementById("sidebar").style.display = "flex";
+          document.getElementById("main").style.display = "flex";
+          initApp(user);
+        } else {
+          overlayStatus.textContent = "Accesso riservato. Clicca per fare login.";
+          overlayLogin.style.display = "inline-block";
+          overlayRecover.style.display = "inline-block";
+        }
+      });
+
+      window.netlifyIdentity.on("login", (user) => {
+        overlay.style.display = "none";
+        document.getElementById("sidebar").style.display = "flex";
+        document.getElementById("main").style.display = "flex";
+        initApp(user);
+      });
+
+      window.netlifyIdentity.on("logout", () => {
+        overlay.style.display = "flex";
+        document.getElementById("sidebar").style.display = "none";
+        document.getElementById("main").style.display = "none";
+        overlayStatus.textContent = "Sei uscito. Clicca per fare login di nuovo.";
+        overlayLogin.style.display = "inline-block";
+        overlayRecover.style.display = "inline-block";
+      });
+
+      window.netlifyIdentity.init();
+
+      overlayLogin.addEventListener("click", () => {
+        window.netlifyIdentity.open("login");
+      });
+
+      overlayRecover.addEventListener("click", () => {
+        window.netlifyIdentity.open("recover");
+      });
+    }
+
+    function initApp(user) {
+      // Load settings
+      loadSettings();
+
+      // Load articles
+      loadArticles();
+    }
+
+    // Event listeners aggiunti al caricamento pagina (funzionano anche prima del login)
+    document.addEventListener("DOMContentLoaded", () => {
+      // Logout
+      const logoutBtn = document.getElementById("logout-btn");
+      if (logoutBtn) logoutBtn.addEventListener("click", () => {
+        if (window.netlifyIdentity) netlifyIdentity.logout();
+        location.reload();
+      });
+
+      // Navigation
+      document.querySelectorAll(".nav-item").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const view = btn.dataset.view;
+          document.querySelectorAll(".nav-item").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+          document.getElementById("view-" + view).classList.add("active");
+          document.getElementById("page-title").textContent = btn.textContent.replace(/^[^\s]+\s/, "");
+        });
+      });
+
+      // Mobile menu toggle
+      const menuToggle = document.getElementById("menu-toggle");
+      if (menuToggle) menuToggle.addEventListener("click", () => {
+        document.getElementById("sidebar").classList.toggle("open");
+      });
+
+      // Save settings
+      const saveSettings = document.getElementById("save-settings");
+      if (saveSettings) saveSettings.addEventListener("click", async () => {
+        const status = document.getElementById("settings-status");
+        status.textContent = "Salvataggio in corso...";
+        try {
+          const user = window.netlifyIdentity ? netlifyIdentity.currentUser() : null;
+          if (!user) throw new Error("Non autenticato");
+          const token = await user.jwt();
+
+          const data = {
+            whatsapp_numero: document.getElementById("s-whatsapp").value,
+            telefono_visibile: document.getElementById("s-telefono").value,
+            email: document.getElementById("s-email").value,
+            wechat_id: document.getElementById("s-wechat").value,
+            weibo_id: document.getElementById("s-weibo").value,
+            annuncio: document.getElementById("s-annuncio").value,
+            sabato: document.getElementById("s-sabato").value,
+            domenica: document.getElementById("s-domenica").value
+          };
+
+          const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+          const sha = await getFileSha("content/settings.json", token);
+
+          const res = await fetch("/.netlify/git/github/contents/content/settings.json", {
+            method: "PUT",
+            headers: {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              content: content,
+              message: "Aggiornato impostazioni da admin panel",
+              sha: sha
+            })
+          });
+
+          if (!res.ok) throw new Error("Errore salvataggio: " + res.status);
+          status.textContent = "Salvato! Il sito si aggiornera in ~1 minuto.";
+        } catch (e) {
+          status.textContent = "Errore: " + e.message;
+          console.error(e);
+        }
+      });
+    });
+
+    async function loadSettings() {
+      try {
+        const r = await fetch("/content/settings.json", { cache: "no-store" });
+        if (r.ok) {
+          const d = await r.json();
+          document.getElementById("s-whatsapp").value = d.whatsapp_numero || "";
+          document.getElementById("s-telefono").value = d.telefono_visibile || "";
+          document.getElementById("s-email").value = d.email || "";
+          document.getElementById("s-wechat").value = d.wechat_id || "";
+          document.getElementById("s-weibo").value = d.weibo_id || "";
+          document.getElementById("s-annuncio").value = d.annuncio || "";
+          document.getElementById("s-sabato").value = d.sabato || "";
+          document.getElementById("s-domenica").value = d.domenica || "";
+        }
+      } catch (e) { console.error(e); }
+    }
+
+    async function loadArticles() {
+      // Placeholder: carica articoli da content/news
+      document.getElementById("articles-list").innerHTML = "<p>Nessun articolo ancora. Clicca '+ Nuovo articolo' per iniziare.</p>";
+    }
+
+    // Save settings listener is registered inside DOMContentLoaded above.
+
+    async function getFileSha(path, token) {
+      try {
+        const r = await fetch(`/.netlify/git/github/contents/${path}`, {
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (r.ok) {
+          const j = await r.json();
+          return j.sha;
+        }
+      } catch (e) { /* ignora */ }
+      return null;
+    }
+  </script>
+</body>
+</html>

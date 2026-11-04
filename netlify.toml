@@ -1,0 +1,9 @@
+# Netlify — sito statico, cartella corrente
+[build]
+  publish = "."
+
+# Pagine riservate: mai nei risultati Google
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

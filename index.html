@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camilla · 老师 | Lezioni di Italiano e Cinese a Torino</title>
+  <meta name="description" content="Camilla, 老师 bilingue italiano-cinese a Torino. Lezioni online e in presenza, metodo su misura, 30 min di prova gratis per i primi 3 studenti." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    // Cattura il token di conferma dall'URL e reindirizza alla pagina di conferma
+    if (location.hash.includes("confirmation_token") || location.hash.includes("recovery_token")) {
+      location.href = "private/confirm.html" + location.hash;
+    }
+  </script>
+</head>
+<body>
+  <div class="book-edge"></div>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">
+        <span class="seal">文</span>
+        <span class="brand-name">Camilla · 老师<small>TORINO · IT / 中文</small></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#prezzi" class="keep" data-i18n="navPrezzi">Prezzi</a>
+        <a href="#metodo" data-i18n="navMetodo">Metodo</a>
+        <a href="#disponibilita" data-i18n="navDisp">Orari</a>
+        <a href="#faq">FAQ</a>
+        <a class="cta-mini" href="#contatti" data-i18n="navCta">Prova gratis</a>
+      </nav>
+      <div class="lang">
+        <button id="btn-it" class="active" type="button">IT</button>
+        <button id="btn-zh" type="button">中文</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 1. PRESENTAZIONE ============ -->
+  <header class="hero wrap" id="top">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot-live"></span><span data-i18n="eyebrow">都灵 ·  weekend · online e in presenza</span></span>
+        <h1><span data-i18n="h1a">Ciao, sono Camilla,</span><br /><span class="zh">你的老师</span> <span class="italic" data-i18n="h1b">di italiano e cinese.</span></h1>
+        <p class="lead" data-i18n="lead">Ho 23 anni e due madrelingua: <strong>italiano e mandarino</strong>. A Torino aiuto studenti cinesi (PoliTO · UniTO) a sbloccare l'italiano — e studenti italiani a imparare il cinese <strong>senza paura dei toni</strong>. Niente corsi fotocopia: un piano cucito su di te.</p>
+        <div class="hero-meta">
+          <span>📍 <b data-i18n="m1">Torino centro + online ovunque</b></span>
+          <span>🎓 <b data-i18n="m2">Bilingue IT / 中文</b></span>
+          <span>🕒 <b data-i18n="m3">Lezioni nel weekend</b></span>
+        </div>
+        <div class="btnrow">
+          <a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/390000000000?text=Ciao%20Camilla!%20Vorrei%20la%20prova%20gratis%20di%2030%20min%20(PROVA%20GRATIS)"><span class="app-ico wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.5 15.5L2 22l4.7-1.2A10 10 0 1 0 12 2Z"/><path fill="#25D366" d="M9 7.6c-.3 0-.7 0-.9.4-.3.4-.9 1-.9 2.3s1 2.7 1.1 2.9c.2.2 2 3.2 5 4.3.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2.1-1.5.2-.7.2-1.3.2-1.5l-.4-.1-2.2-1c-.3-.1-.5-.1-.7.1l-1 1.3c-.2.3-.4.3-.7.1-.7-.3-1.5-.7-2.1-1.3-.5-.5-1-1.1-1.3-1.5-.2-.3 0-.5.1-.7l.7-.8c.2-.2.3-.4.3-.6.1-.2.1-.4 0-.6L10.2 8c-.2-.3-.5-.4-.8-.4h-.4Z"/></svg></span> <span data-i18n="cta1">Prenota i 30 min gratis</span></a>
+          <a class="btn btn-ghost" href="#prezzi"><span data-i18n="cta2">Vedi i prezzi ↓</span></a>
+        </div>
+        <p class="btn-note" data-i18n="ctanote">Solo per i primi 3 nuovi studenti · senza impegno · rispondo in giornata, anche in cinese.</p>
+      </div>
+
+      <aside class="teacher-card">
+        <div class="teacher-photo" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;">
+          <div class="photo-placeholder" style="width:108px;height:108px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-zh);font-size:42px;">文</div>
+          <div class="vertical-zh">中文老师 · 意大利语</div>
+        </div>
+        <div class="teacher-info">
+          <span class="role">LAOSHI · TUTOR BILINGUE</span>
+          <h2>Camilla, <span id="teacher-age">23</span> anni</h2>
+          <p data-i18n="teacherBio">Cresciuta tra due lingue. Lezioni 70% conversazione, 30% grammatica. Dopo ogni lezione: schede personalizzate + correzione vocale su WeChat/WhatsApp.</p>
+          <span class="stamp">文老师 · Torino</span>
+          <div class="ticket">
+            <span class="left">PROMO LANCIO — 剩余 3/3</span><br />
+            <strong data-i18n="ticketT">30 min conoscitivi GRATIS</strong>
+            <div data-i18n="ticketB">Analisi di livello + piano di studio. Scrivi “PROVA GRATIS”.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <!-- ============ 2. PREZZI (subito in alto) ============ -->
+  <section class="block wrap reveal" id="prezzi">
+    <div class="sec-head">
+      <div class="sec-num">价</div>
+      <div><span class="kicker" data-i18n="pKick">Lezioni & prezzi — chiari, senza sorprese</span><h2 data-i18n="pTitle">Quanto costa imparare con me</h2></div>
+    </div>
+    <p class="sec-sub" data-i18n="pSub">Online costa meno. In presenza a Torino c'è un piccolo extra per lo spostamento. Pacchetti con sconto, schede sempre incluse.</p>
+
+    <div class="price-grid">
+      <article class="price-card">
+        <h3>💻 Online <span class="zh-inline">线上</span></h3>
+        <div class="amount">12€ <small>/ ora</small></div>
+        <div class="per">ZOOM · MEET · WECHAT</div>
+        <ul>
+          <li data-i18n="o1">60 min = 12€ · 90 min = 17€</li>
+          <li data-i18n="o2">Zero costi di spostamento</li>
+          <li data-i18n="o3">Schede PDF + audio toni inclusi</li>
+          <li data-i18n="o4">Ideale per HSK ed esami scritti</li>
+        </ul>
+        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://wa.me/390000000000?text=Vorrei%20lezione%20ONLINE%20con%20Camilla"><span data-i18n="chooseOn">Scegli online</span></a>
+      </article>
+
+      <article class="price-card featured">
+        <span class="tag" data-i18n="tagPop">★ PIÙ SCELTA A TORINO</span>
+        <h3>📍 In presenza <span class="zh-inline">面授</span></h3>
+        <div class="amount">15€ <small>/ ora</small></div>
+        <div class="per">TORINO · BAR · BIBLIOTECA · CASA</div>
+        <ul>
+          <li data-i18n="p1">60 min = 15€ · 90 min = 22€</li>
+          <li data-i18n="p2">Centro incluso · fuori centro +3€</li>
+          <li data-i18n="p3">Si parla di più: 70% conversazione</li>
+          <li data-i18n="p4">Schede stampate per te</li>
+        </ul>
+        <a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/390000000000?text=Vorrei%20lezione%20IN%20PRESENZA%20a%20Torino"><span data-i18n="choosePr">Scegli presenza</span></a>
+      </article>
+
+      <article class="price-card">
+        <h3>📦 Pacchetto 5 <span class="zh-inline">优惠</span></h3>
+        <div class="amount">51€ <small>/ 5 ore online</small></div>
+        <div class="per">64€ IN PRESENZA · −15%</div>
+        <ul>
+          <li data-i18n="k1">Validità 2 mesi, recupero gratis</li>
+          <li data-i18n="k2">Supporto chat tra le lezioni</li>
+          <li data-i18n="k3">Piano di studio scritto incluso</li>
+          <li data-i18n="k4">Cancellazione gratis fino a 24h prima</li>
+        </ul>
+        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://wa.me/390000000000?text=Vorrei%20il%20PACCHETTO%205%20lezioni"><span data-i18n="choosePk">Voglio il pacchetto</span></a>
+      </article>
+    </div>
+
+    <table class="compare">
+      <tr><th data-i18n="t0">Lezione</th><th>Online 线上</th><th data-i18n="t2">Presenza 面授</th></tr>
+      <tr><td data-i18n="r1">Prova 30 min (primi 3 studenti)</td><td class="hl">Gratis 免费</td><td class="hl">Gratis 免费</td></tr>
+      <tr><td data-i18n="r2">Singola 60 min</td><td>12€</td><td>15€</td></tr>
+      <tr><td data-i18n="r3">5 lezioni (5 ore)</td><td>51€</td><td>64€</td></tr>
+      <tr><td data-i18n="r4">Coppia, 60 min (totale, stesso livello)</td><td>18€</td><td>22€</td></tr>
+    </table>
+    <p class="fineprint" data-i18n="fine">Paghi con Satispay, bonifico o contanti. Dopo le 24h la cancellazione vale 50%. Fuori centro (Lingotto, Mirafiori, oltre Po…): +3€ trasferta.</p>
+  </section>
+
+  <!-- ============ 3. METODO ============ -->
+  <section class="block wrap reveal" id="metodo">
+    <div class="sec-head">
+      <div class="sec-num">法</div>
+      <div><span class="kicker" data-i18n="meKick">Il mio metodo · 我的方法</span><h2 data-i18n="meTitle">Non faccio lezioni. Alleno persone.</h2></div>
+    </div>
+    <p class="sec-sub" data-i18n="meSub">Quattro passi, sempre uguali. Il contenuto invece cambia ogni volta: lo costruisco sui tuoi punti forti e deboli dopo la prova gratuita.</p>
+    <div class="steps">
+      <div class="step"><div class="hanzi">识</div><h3 data-i18n="s1t">1 · Conoscenza (30 min)</h3><p data-i18n="s1b">Chiacchierata + mini-test di livello. Capisco obiettivi, esami, paure.</p><span class="min">GRATIS × primi 3 ·线上/面授</span></div>
+      <div class="step"><div class="hanzi">析</div><h3 data-i18n="s2t">2 · Analisi</h3><p data-i18n="s2b">Ascolto, parlato, grammatica. Cinese: pinyin + toni. Italiano: conversazione + scrittura.</p><span class="min">SCHEDA LIVELLO SCRITTA</span></div>
+      <div class="step"><div class="hanzi">制</div><h3 data-i18n="s3t">3 · Piano su misura</h3><p data-i18n="s3b">Schede PDF create per te (anche LaTeX): dialoghi veri — università, lavoro, vita a Torino.</p><span class="min">PDF + AUDIO DOPO OGNI LEZIONE</span></div>
+      <div class="step"><div class="hanzi">练</div><h3 data-i18n="s4t">4 · Pratica + feedback</h3><p data-i18n="s4b">70% si parla, 30% grammatica. Compiti brevi + correzione vocale in chat.</p><span class="min">SUPPORTO WECHAT / WHATSAPP</span></div>
+    </div>
+    <div class="tracks">
+      <div class="track"><h3>🇮🇹 Italiano per cinesi 意语</h3><p data-i18n="tr1">B1/B2, esami UniTO/PoliTO, email ai prof, colloqui, permesso e cittadinanza.</p></div>
+      <div class="track"><h3>🇨🇳 Cinese per italiani 中文</h3><p data-i18n="tr2">Pinyin e toni, 300 caratteri base, conversazione viaggio/lavoro, HSK 1–3.</p></div>
+      <div class="track"><h3>🎓 Supporto università 大学</h3><p data-i18n="tr3">Capire le lezioni, preparare orali, tesine e presentazioni senza panico.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 4. DISPONIBILITÀ ============ -->
+  <section class="block wrap reveal" id="disponibilita">
+    <div class="sec-head">
+      <div class="sec-num">时</div>
+      <div><span class="kicker">Orari · 时间</span><h2 data-i18n="dTitle">Quando sono libera</h2></div>
+    </div>
+    <p class="sec-sub" data-i18n="dSub">Insegno nel <b>weekend</b>. Questa lavagna si aggiorna da sola quando Camilla inserisce gli orari nel pannello. Tocca un orario per prenotarlo su WhatsApp.</p>
+    <div class="cal-shell">
+      <div class="cal-title">WEEKEND · 周末 · TORINO (CET)</div>
+      <div class="cal-grid" id="cal-box"><p style="color:#b9b09a">…carico gli orari…</p></div>
+      <div class="cal-foot"><span id="aggiornato"></span><span id="promo-line"></span></div>
+    </div>
+  </section>
+
+  <!-- ============ 5. FAQ ============ -->
+  <section class="block wrap faq reveal" id="faq">
+    <div class="sec-head">
+      <div class="sec-num">问</div>
+      <div><span class="kicker">FAQ · 常见问题</span><h2>Le domande che mi fanno sempre</h2></div>
+    </div>
+    <p class="sec-sub">Se non trovi la risposta, scrivimi: ti rispondo io, non un bot.</p>
+    <details open><summary>Dove ci vediamo in presenza?</summary><p>Centro Torino: biblioteche, bar tranquilli o a casa tua. Online: Zoom, Meet o videochiamata WeChat — come preferisci tu.</p></details>
+    <details><summary>Come funziona la prova gratuita da 30 min?</summary><p>15 minuti di chiacchierata + 15 di mini-test. Alla fine ti dico il tuo livello, cosa sistemare per primo e quante lezioni ti servono. Poi decidi tu, senza pressioni.</p></details>
+    <details><summary>Devo comprare libri?</summary><p>No. Le schede le preparo io in PDF. Se vuoi un manuale, te lo consiglio dopo la prova, in base al livello.</p></details>
+    <details><summary>Come pago? E se devo disdire?</summary><p>Satispay, bonifico o contanti. Disdetta gratis fino a 24h prima; dopo, vale il 50% della lezione.</p></details>
+    <details><summary>Si può fare in coppia con un amico?</summary><p>Sì, se avete lo stesso livello: 18€ online / 22€ in presenza in totale. Pagate meno a testa e parlate di più.</p></details>
+  </section>
+
+  <!-- ============ 6. CONTATTI ============ -->
+  <section class="block wrap reveal" id="contatti">
+    <div class="contact-band">
+      <div>
+        <h2 data-i18n="cTitle">Scrivimi “PROVA GRATIS” 💌</h2>
+        <p data-i18n="cSub">Dimmi chi sei, il tuo livello e se vuoi online o presenza. Rispondo in giornata — anche in 中文.</p>
+      </div>
+      <div class="btnrow contact-btns">
+        <a class="btn btn-solid" target="_blank" rel="noopener" href="https://wa.me/390000000000?text=Ciao%20Camilla!%20Sono...%20il%20mio%20livello%20%C3%A8...%20vorrei%20PROVA%20GRATIS"><span class="app-ico wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.5 15.5L2 22l4.7-1.2A10 10 0 1 0 12 2Z"/><path fill="#25D366" d="M9 7.6c-.3 0-.7 0-.9.4-.3.4-.9 1-.9 2.3s1 2.7 1.1 2.9c.2.2 2 3.2 5 4.3.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2.1-1.5.2-.7.2-1.3.2-1.5l-.4-.1-2.2-1c-.3-.1-.5-.1-.7.1l-1 1.3c-.2.3-.4.3-.7.1-.7-.3-1.5-.7-2.1-1.3-.5-.5-1-1.1-1.3-1.5-.2-.3 0-.5.1-.7l.7-.8c.2-.2.3-.4.3-.6.1-.2.1-.4 0-.6L10.2 8c-.2-.3-.5-.4-.8-.4h-.4Z"/></svg></span> WhatsApp</a>
+        <a class="btn btn-line" href="mailto:camilla@example.com"><span class="app-ico mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="#EA4335" stroke-width="2"/><path d="M3.5 7.5 12 13.5l8.5-6" fill="none" stroke="#EA4335" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Email</a>
+      </div>
+      <div class="qr-block" style="margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <img src="qr-camilla.png" alt="QR code WhatsApp Camilla" style="width:150px;height:150px;border-radius:8px;border:2px solid var(--line);" />
+        <span style="font-size:12px;color:var(--muted);">Scansiona per scrivermi su WhatsApp</span>
+      </div>
+    </div>
+    
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Camilla · 老师 — fatto a mano a Torino ❤️</span>
+      <span><a href="admin/index.html" title="Area riservata" style="text-decoration:none">🔒</a></span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
